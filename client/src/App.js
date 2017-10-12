@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 const Faye = window.Faye;
 
 class App extends Component {
     componentDidMount(){
-        console.log('Faye',Faye)
 
     }
 
@@ -22,7 +19,7 @@ class App extends Component {
 
                 <div>
                     <label>Message</label>
-                    <textarea></textarea>                    
+                    <textarea></textarea>
                     <button>Send</button>
                 </div>
 
