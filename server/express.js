@@ -3,6 +3,8 @@ const body_parser = require('body-parser');
 const compression = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
+const config = require('./config');
+
 const app = express();
 
 app.use(helmet());

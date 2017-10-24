@@ -1,8 +1,14 @@
-var http = require('http'),
-    faye = require('faye');
+process.on('uncaughtException', function(err){
+  //log
+  console.log(err);
+});
 
-var server = http.createServer(),
-    bayeux = new faye.NodeAdapter({mount: '/faye', timeout: 45});
+var config = require('./config');
+var app = require('./express');
+var db = require('./db');
+var fs = require('fs');
 
-bayeux.attach(server);
-server.listen(8000);
+module.exports = app.listen(config.port.webserver, function(){
+    db.connect(config.db);
+    console.log('Listening on port '+config.port.webserver);
+});
