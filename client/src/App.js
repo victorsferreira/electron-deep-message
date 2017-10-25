@@ -23,6 +23,7 @@ class App extends Component {
         this.messages_element;
         this.is_loading = false;
         this.last_id = null;
+        this.keep_loading = true;
     }
 
     componentDidMount(){
@@ -63,7 +64,8 @@ class App extends Component {
         });
 
         subscription.then(()=>{
-            this.getMessages(code);
+            this.keep_loading = true;
+            this.getMessages(code, this.getInitialMessages);
             // axios.get('http://localhost:8090/'+code+'?last_id='+(this.last_id || ''))
             // .then((response)=>{
             //     var result = response.data;
@@ -78,21 +80,31 @@ class App extends Component {
         });
     }
 
-    getMessages(code){
-        this.is_loading = true
-        ;
+    getMessages(code, callback){
+        this.is_loading = true;
+
         axios.get('http://localhost:8090/'+code+'?last_id='+(this.last_id || ''))
         .then((response)=>{
             var result = response.data;
-            this.last_id = result[0]._id;
+            if(result.length) this.last_id = result[0]._id;
 
-            this.setState({messages: result});
-            this.scrollToBottomOfMessages();
+            callback.call(this,result);
 
             this.is_loading = false;
-        }).catch(()=>{
+        }).catch((err)=>{
+            console.log('err',err)
             this.setState({messages: []});
         })
+    }
+
+    getInitialMessages(messages,on_finish){
+        this.setState({messages: messages},on_finish);
+        this.scrollToBottomOfMessages();
+    }
+
+    getMoreMessages(messages, on_finish){
+        if(!messages.length) this.keep_loading = false;
+        this.setState({messages: messages.concat(this.state.messages)},on_finish);
     }
 
     render() {
@@ -136,8 +148,8 @@ class App extends Component {
 
                     <div id="messages" onScroll={
                             (e)=>{
-                                if(this.messages_element.scrollTop < 10 && !this.is_loading){
-                                    this.getMessages(this.state.code);
+                                if(this.messages_element.scrollTop < 10 && !this.is_loading && this.keep_loading){
+                                    this.getMessages(this.state.code, this.getMoreMessages);
                                 }
                             }
                         }>
