@@ -9,9 +9,9 @@ class Message extends Component {
 
     render() {
         return (
-            <div className="Message">
-                <div>{moment(this.props.datetime).format('DD/MM/YYYY [at] hh:mm')}</div>
-                <div>{this.props.message}</div>
+            <div className="message">
+                <div className='header'>{moment(this.props.datetime).format('DD/MM/YYYY [at] hh:mm')}</div>
+                <div className='text'>{this.props.message}</div>
             </div>
         );
     }

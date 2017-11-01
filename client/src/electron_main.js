@@ -19,7 +19,7 @@ function createWindow() {
             });
 
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600});
+    mainWindow = new BrowserWindow({width: 400, height: 800, resizeble: false});
 
     // and load the index.html of the app.
     // mainWindow.loadURL('http://localhost:3000');

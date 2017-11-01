@@ -1,0 +1,116 @@
+$blue: rgb(50, 150, 220);
+$blue_outline: rgb(30, 130, 200);
+
+*{
+    font-size: 16px;
+    box-sizing: border-box;
+
+}
+
+#app{
+    // background: green;
+}
+
+#messages{
+    // height: 400px;
+    overflow: auto;
+
+    .message{
+        margin-bottom: 10px;
+
+        .header{
+            font-size: 14px;
+            color: rgb(120,120,120)
+        }
+
+        .text{
+            font-size: 18px;
+            color: rgb(50,50,50);
+            letter-spacing: 1.5px;
+        }
+    }
+}
+
+#chat-code{
+    height: 15vh;
+    // background: yellow;
+
+    .generate-code{
+        margin-top: 5px;
+    }
+}
+
+#messages{
+    height: 55vh;
+    // background: green
+}
+
+#text-box{
+    height: 30vh;
+    // background: blue;
+
+    .send-message{
+        margin-top: 5px;
+    }
+}
+
+#chat-code, #text-box, #messages{
+    padding: 10px 20px;
+}
+
+.button{
+    padding: 10px 20px;
+    border-radius: 3px;
+    background: $blue;
+    border: 1px solid $blue_outline;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover{
+        background: lighten($blue, 10);
+        border-color: lighten($blue_outline, 10);
+    }
+}
+
+.inline-button{
+    color: $blue;
+    cursor: pointer;
+    font-weight: bold;
+    background: none;
+    border: 0 none;
+
+    &:hover{
+        color: lighten($blue, 10);
+    }
+}
+
+.horizontal-division{
+    border: 0 none;
+    border-bottom: 1px solid rgb(50,50,50);
+    width: 100%;
+    display: inline-block;
+    padding: 40px 20px;
+}
+
+input, textarea{
+    border: 0 none;
+    outline: 0 none;
+    background: rgb(240,240,240);
+    border-radius: 20px;
+    width: 100%;
+    color: rgb(50,50,50);
+}
+
+textarea{
+    padding: 20px 20px;
+    resize: none;
+    height: 120px;
+}
+
+input{
+    padding: 0px 20px;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    height: 40px;
+}
